@@ -1,6 +1,9 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Badge, Box, Flex, Text } from '@chakra-ui/react';
+import { FaCheckCircle } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { Todo } from './TodoList';
 
-export default function TodoItem( {todo}:{todo:any}) {
+export default function TodoItem( {todo}:{todo:Todo}) {
   return (
     <>
     <Flex gap={2} alignItems={'center'}>
@@ -19,8 +22,26 @@ export default function TodoItem( {todo}:{todo:any}) {
    >
     {todo.body}
    </Text>
+   {todo.completed && (
+    <Badge ml='1' colorScheme='green'>
+        Done
+    </Badge>
+   )}
+   {!todo.completed && (
+    <Badge ml='1' colorScheme='yellow'>
+        In progress
+    </Badge>
+   )}
+</Flex>
+<Flex gap={2} alignItems={'center'}>
+    <Box color={'green.500'} cursor={'pointer'}>
+    <FaCheckCircle size={20}/>
+    </Box>
+    <Box color={'red.500'} cursor={'pointer'}>
+    <MdDelete size={25}/>
+    </Box>
 
-    </Flex>
+</Flex>
     </Flex>
     </>
   );

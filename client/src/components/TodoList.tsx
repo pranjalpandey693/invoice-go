@@ -2,45 +2,27 @@ import { Flex, Spinner, Stack, Text } from '@chakra-ui/react';
 import  { useState } from 'react';
 import TodoItem from './TodoItem';
 
+export type Todo = {
+  _id : number;
+  body: string;
+  completed: boolean;
+}
+
 
 export default function TodoList() {
-  const [isLoading , setIsloading] = useState(true)
-  const todos = [
-    {
-        _id:1,
-        body:"buy groceries",
-        completed: true,
-    },
-    {
-        _id:2,
-        body:"walk the dog",
-        completed: true,
-    },
-    {
-        _id:3,
-        body:" buy phone",
-        completed: true,
-    },
-    {
-        _id:4,
-        body:"do laundry",
-        completed: true,
-    },
-    {
-        _id:5,
-        body:" read a book",
-        completed: true,
-    },
-    {
-        _id:6,
-        body:" go to gym ",
-        completed: true,
-    },
-  ]
+  const [isLoading , setIsloading] = useState( )
+  
     return (
    <>
    
-   <Text fontSize={"4xl"} textTransform={"uppercase"} fontWeight={"bold"} textAlign={'center'} my={2}  >
+   <Text
+    bgGradient={'linear(to-l,#0b85f8,#00ffff)'} 
+    bgClip={'text'}
+    fontSize={"4xl"} 
+    textTransform={"uppercase"}
+    fontWeight={"bold"} 
+    textAlign={'center'} 
+    my={2}  >
     Today's Tasks
    </Text>
    {isLoading && (
