@@ -20,7 +20,7 @@ export default function TodoItem( {todo}:{todo:Todo}) {
    color={todo.completed ? 'green.200' : 'yellow.100'}
    textDecoration={todo.completed ? 'line-through' : 'none'}
    >
-    {todo.body}
+    {todo.Body}
    </Text>
    {todo.completed && (
     <Badge ml='1' colorScheme='green'>

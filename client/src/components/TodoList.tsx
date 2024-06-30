@@ -1,17 +1,43 @@
 import { Flex, Spinner, Stack, Text } from '@chakra-ui/react';
-import  { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
+import axios from '../axios/axios';
 
 export type Todo = {
-  _id : number;
-  body: string;
+   ID: string;
+  Body: string;
   completed: boolean;
 }
 
 
 export default function TodoList() {
-  const [isLoading , setIsloading] = useState( )
+  const [isLoading , setIsloading] = useState<boolean>(false)
+  const [todos, setTodo] = useState<Todo[]>([])
   
+  useEffect(()=>{
+   async function getTodo(){
+   try {
+    setIsloading(true)
+    const res = await axios.get('/todos')
+    setTodo(res.data)
+    console.log(res.data)
+    
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setIsloading(false)
+  }
+
+   }
+   getTodo()
+
+  },[])
+    
+  
+
+
+
+ 
     return (
    <>
    
@@ -39,7 +65,8 @@ export default function TodoList() {
    )}
    <Stack gap={3} >
    {todos?.map((todo)=>(
-    <TodoItem key={todo._id} todo={todo}/>
+   
+    <TodoItem key={todo.ID} todo={todo}/>
    ))}
    </Stack>
    </>
