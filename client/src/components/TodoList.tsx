@@ -20,7 +20,7 @@ export default function TodoList() {
     setIsloading(true)
     const res = await axios.get('/todos')
     setTodo(res.data)
-    console.log(res.data)
+   
     
   } catch (error) {
     console.log(error)
