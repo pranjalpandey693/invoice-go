@@ -1,28 +1,29 @@
 import {create} from 'zustand'
 
 interface Todo {
-    id: number;
-    text: string;
-    completed: boolean;
+    ID: string;
+  Body: string;
+  completed: boolean;
 }
+
 
 interface TodoStore {
     todos: Todo[];
     addTodo: (todo: Todo) => void;
-    updateTodo: (id: number, updatedTodo: Partial<Todo>) => void;
-    deleteTodo: (id: number) => void;
+    updateTodo: (id:string, updatedTodo:Todo)=> void; 
+    deleteTodo: (id: string) => void;
 }
 
 const useTodoStore = create<TodoStore>((set) => ({
     todos: [],
     addTodo: (todo: Todo) => set((state) => ({ todos: [...state.todos, todo] })),
-    updateTodo: (id: number, updatedTodo: Partial<Todo>) => set((state) => ({
-        todos: state.todos.map((todo) => 
-            todo.id === id ? { ...todo, ...updatedTodo } : todo
+     updateTodo: (id:string , updatedTodo: Todo)=> set((state)=>({
+        todos: state.todos.map((todo)=>
+        todo.ID === id ? updatedTodo : todo 
         )
-    })),
-    deleteTodo: (id: number) => set((state) => ({
-        todos: state.todos.filter((todo) => todo.id !== id)
+     })),
+    deleteTodo: (id: string) => set((state) => ({
+        todos: state.todos.filter((todo) => todo.ID !== id)
     })),
 }))
 
