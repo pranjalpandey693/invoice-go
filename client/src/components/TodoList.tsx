@@ -1,5 +1,5 @@
 import { Flex, Spinner, Stack, Text } from '@chakra-ui/react';
-import  {  useState } from 'react';
+import  {  useEffect, useState } from 'react';
 import TodoItem from './TodoItem';
 import useTodoStore  from './useTodoStore'
 
@@ -14,8 +14,11 @@ export default function TodoList() {
   const [isLoading , setIsloading] = useState<boolean>(false)
 
 const todos = useTodoStore((state)=> state.todos)
+const {fetchTodos} = useTodoStore()
 
-  
+  useEffect (()=>{
+    fetchTodos()
+  },[fetchTodos])
   
 
 

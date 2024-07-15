@@ -10,22 +10,24 @@ interface Todo {
 
 interface TodoStore {
     todos: Todo[];
-    addTodo: (todo: Todo) => void;
-    updateTodo: (id:string, updatedTodo:Todo)=> void; 
-    deleteTodo: (id: string) => void;
+    fetchTodos:()=> Promise<void>
+    // addTodo: (Todo:Pick<Todo, 'Body'>)=> Promise<void>
+    // updateTodo: (id:string)=> Promise<void>; 
+    // deleteTodo: (id: string) => Promise<void>;
 }
 
 const useTodoStore = create<TodoStore>((set) => ({
     todos: [],
-    addTodo: (todo: Todo) => set((state) => ({ todos: [...state.todos, todo] })),
-     updateTodo: (id:string , updatedTodo: Todo)=> set((state)=>({
-        todos: state.todos.map((todo)=>
-        todo.ID === id ? updatedTodo : todo 
-        )
-     })),
-    deleteTodo: (id: string) => set((state) => ({
-        todos: state.todos.filter((todo) => todo.ID !== id)
-    })),
+    fetchTodos: async () => {
+        try {
+            const res = await axios.get('/todos')
+            set({todos:res.data})
+            
+        } catch (error) {
+          console.log("error fetching todos", error)
+        }
+    },
+  
 }))
 
 export default useTodoStore;
