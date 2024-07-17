@@ -20,13 +20,20 @@ const useTodoStore = create<TodoStore>((set) => ({
     todos: [],
     fetchTodos: async () => {
         try {
-            const res = await axios.get('/todos')
+            const res = await axios.get<Todo[]>('/todos')
             set({todos:res.data})
             
         } catch (error) {
           console.log("error fetching todos", error)
         }
     },
+    addTodo: async ()=> {
+        try {
+            
+        } catch (error) {
+            
+        }
+    }
   
 }))
 
